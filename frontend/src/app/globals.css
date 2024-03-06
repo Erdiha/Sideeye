@@ -14,9 +14,13 @@
   --primary-dark2:#1F2544;
   --primary-text:#FEFBF6;
   --vintage-orange:#ECB159;
+<<<<<<< Updated upstream
   --vintage-brown:rgb(182, 115, 82);
   --vintage-orange-50: rgb(6, 182, 212,0.6);
   
+=======
+  --vintage-brown:#B67352;
+>>>>>>> Stashed changes
 }
 
 
@@ -28,6 +32,7 @@
   }
 }
 
+<<<<<<< Updated upstream
 
   
 
@@ -35,6 +40,16 @@
   
 }
 
+=======
+body {
+  background-color: #2c3e50;
+}
+
+@layer components {
+  
+}
+
+>>>>>>> Stashed changes
 
 @layer utilities {
   .text-balance {
