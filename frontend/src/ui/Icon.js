@@ -1,13 +1,22 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 
-const Icon = () => {
+const Icon = ({ withText }) => {
+  const styleWithOutText = { width: "fit", height: "fit", marginTop: "0" };
+  const styleWithText = { width: "full", height: "full", marginTop: "5rem" };
   return (
-    <div className=" w-full h-full flex justify-evenly items-center mt-20 md:mt-0 ">
-      <section className="items-center justify-center flex  w-40 h-40  ">
+    <div
+      style={withText ? styleWithText : styleWithOutText}
+      className=" flex justify-evenly items-center  md:mt-0 "
+    >
+      <section
+        className={`items-center justify-center flex ${
+          withText ? "w-40 h-40" : ""
+        } `}
+      >
         <motion.div
           initial={{ x: 1000 }}
-          animate={{ x: 0 }}
+          animate={{ x: withText ? 0 : 20 }}
           transition={{
             duration: 1,
             type: "spring",
@@ -16,9 +25,11 @@ const Icon = () => {
           }}
           className=" w-10 h-10 flex justify-center items-center"
         >
-          <span className="text-[--primary-text] font-bold text-2xl  z-50 text-shadow-xl">
-            SID
-          </span>
+          {withText && (
+            <span className="text-[--primary-text] font-bold text-2xl  z-50 text-shadow-xl">
+              SID
+            </span>
+          )}
           <Image
             style={{
               borderBottomLeftRadius: "50%",
@@ -45,7 +56,7 @@ const Icon = () => {
         </motion.div>
         <motion.div
           initial={{ x: -1000 }}
-          animate={{ x: 0 }}
+          animate={{ x: withText ? 0 : -20 }}
           transition={{
             duration: 1,
             type: "spring",
@@ -79,9 +90,11 @@ const Icon = () => {
             width={100}
             src="/e.png"
           />
-          <span className="text-[--primary-text] font-bold text-2xl z-50 text-shadow-xl">
-            YE
-          </span>
+          {withText && (
+            <span className="text-[--primary-text] font-bold text-2xl z-50 text-shadow-xl">
+              YE
+            </span>
+          )}
         </motion.div>
       </section>
     </div>

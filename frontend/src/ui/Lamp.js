@@ -127,7 +127,7 @@ export const LampContainer = ({ children, className }) => {
         focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 
         focus:ring-offset-slate-50  absolute bottom-0"
       >
-        <Link href="/login">Start Here</Link>
+        <Link href="/saloon">Start Here</Link>
       </motion.button>
     </div>
   );
