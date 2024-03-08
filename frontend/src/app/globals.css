@@ -32,6 +32,19 @@
 }
 
 
+@layer{
+  .leaflet-popup-content-wrapper {
+     background-color: var(--primary-dark);
+    border: 0px solid #ccc;
+    padding: 0!important;
+    border-radius: 5px;
+    margin: 0!important;
+    display: flex; 
+
+  }
+  
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;

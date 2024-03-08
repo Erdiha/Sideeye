@@ -7,7 +7,7 @@ export default function LampComponent() {
   return (
     <div>
       <LampContainer>
-        <Icon />
+        <Icon withText={true} />
 
         <motion.h1
           initial={{ opacity: 0.5, y: 100 }}

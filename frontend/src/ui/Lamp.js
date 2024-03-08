@@ -1,55 +1,28 @@
-"use client";
 import { cn } from "@/utils/cn";
 import { motion } from "framer-motion";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export const LampContainer = ({ children, className }) => {
+  const router = useRouter();
+  const handleClick = () => {
+    router.push("/saloon");
+  };
   return (
     <div
       className={cn(
-        "relative flex max-h-screen h-screen flex-col items-center justify-center overflow-hidden bg-slate-950 w-full rounded-md z-0",
+        "relative flex max-h-screen h-screen flex-col items-center justify-center overflow-hidden bg-slate-950 w-full  z-0",
         className
       )}
     >
-      <motion.div
-        initial={{ scale: 20 }}
-        transition={{
-          duration: 0.8,
-          ease: "easeInOut",
-          damping: 3,
-          stiffness: 40,
-        }}
-        animate={{ scale: 1, zIndex: "9999" }}
-      >
-        {/* <Image
-          style={{
-            backgroundColor: "var(--background-off-white)",
-            zIndex: "9999",
-            borderRadius: "20%",
-            aspectRatio: 1,
-            backgroundRepeat: "no-repeat",
-            position: "relative",
-            filter: "drop-shadow(0px 0px 1px #ffff)",
-            transition: "all 0.5s ease-in-out",
-            objectPosition: "center",
-            objectFit: "cover",
-            border: "var(--vintage-brown) 1px solid",
-            translate: "0% 150%",
-            transform: "all 1s linear ease",
-          }}
-          width="70"
-          height="70"
-          src="/sideeye5.png"
-        /> */}
-      </motion.div>
       <div className="relative flex w-full flex-1 scale-y-125 items-center justify-center isolate z-0 ">
         <motion.div
-          initial={{ opacity: 0.5, width: "15rem" }}
+          initial={{ opacity: 0.5, width: "10rem" }}
           whileInView={{ opacity: 1, width: "30rem" }}
           transition={{
-            delay: 0.3,
-            duration: 0.8,
+            delay: 0.1,
+            duration: 1.1,
             ease: "easeInOut",
+            damping: 2,
           }}
           style={{
             backgroundImage: `conic-gradient(var(--conic-position), var(--tw-gradient-stops))`,
@@ -116,7 +89,9 @@ export const LampContainer = ({ children, className }) => {
           Your Data, Your Rules.
         </motion.p>
       </div>
+
       <motion.button
+        onClick={() => handleClick()}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, bottom: "10%" }}
         transition={{ delay: 0.1, duration: 0.9 }}
@@ -127,7 +102,7 @@ export const LampContainer = ({ children, className }) => {
         focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 
         focus:ring-offset-slate-50  absolute bottom-0"
       >
-        <Link href="/saloon">Start Here</Link>
+        Start Here
       </motion.button>
     </div>
   );

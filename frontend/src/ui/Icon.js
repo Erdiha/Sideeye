@@ -51,6 +51,7 @@ const Icon = ({ withText }) => {
             className="bg-[--vintage-orange-50]"
             height={80}
             width={100}
+            alt="icon image"
             src="/e.png"
           />
         </motion.div>
@@ -85,9 +86,11 @@ const Icon = ({ withText }) => {
 
               // border: "1px solid #fff",
             }}
+            alt="icon image"
             className="bg-[--vintage-orange-50]"
             height={100}
             width={100}
+            priority
             src="/e.png"
           />
           {withText && (
