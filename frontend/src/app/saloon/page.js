@@ -8,7 +8,8 @@ import { useEffect, useRef, useState } from "react";
 
 const Saloon = () => {
   const mapRef = useRef(null);
-  const [currentPosition, setCurrentPosition] = useState(); // Default position
+  const [currentPosition, setCurrentPosition] = useState();
+  const [menuOpen, setMenuOpen] = useState(false);
   const [markers, setMarkers] = useState([
     {
       id: 0,
@@ -36,7 +37,19 @@ const Saloon = () => {
       info: "Marker 1",
       imgSrc: "/sideeye4.png",
       text: "A",
-      stats: {},
+      stats: {
+        height: "6'8",
+        weight: "190",
+        bust: "90",
+        waist: "50",
+        hip: "100",
+        shoe: "9",
+        hair: "blonde",
+        eye: "blue",
+        skin: "white",
+        complexion: "fair",
+        description: "Yayyyy",
+      },
     },
     {
       id: 2,
@@ -44,6 +57,19 @@ const Saloon = () => {
       info: "Marker 2",
       imgSrc: "/sideeye2.png",
       text: "B",
+      stats: {
+        height: "5'4",
+        weight: "150",
+        bust: "90",
+        waist: "50",
+        hip: "100",
+        shoe: "9",
+        hair: "brown",
+        eye: "green",
+        skin: "brown",
+        complexion: "fair",
+        description: "Yasss",
+      },
     },
     {
       id: 3,
@@ -51,6 +77,7 @@ const Saloon = () => {
       info: "Marker 3",
       imgSrc: "/sideeye3.webp",
       text: "C",
+      stats: {},
     },
     {
       id: 4,
@@ -58,6 +85,7 @@ const Saloon = () => {
       info: "Marker 4",
       imgSrc: "/sideeye5.png",
       text: "D",
+      stats: {},
     },
   ]);
 
@@ -86,7 +114,7 @@ const Saloon = () => {
       <Head>
         <meta
           name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no"
         />
       </Head>
       <div className="flex flex-col md:flex-row max-h-screen max-w-screen relative overflow-hidden">

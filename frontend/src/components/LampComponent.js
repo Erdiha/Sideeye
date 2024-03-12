@@ -1,12 +1,11 @@
-"use client";
 import Icon from "@/ui/Icon";
 import { motion } from "framer-motion";
-import { LampContainer } from "../ui/Lamp";
+import { Lamp } from "../ui/Lamp";
 
 export default function LampComponent() {
   return (
     <div>
-      <LampContainer>
+      <Lamp>
         <Icon withText={true} />
 
         <motion.h1
@@ -23,7 +22,7 @@ export default function LampComponent() {
         >
           Your Business, <br /> Is yours!
         </motion.h1>
-      </LampContainer>
+      </Lamp>
     </div>
   );
 }

@@ -7,11 +7,11 @@ const Icon = ({ withText }) => {
   return (
     <div
       style={withText ? styleWithText : styleWithOutText}
-      className=" flex justify-evenly items-center  md:mt-0 "
+      className=" flex justify-evenly items-center w-10 h-10  md:mt-0 "
     >
       <section
-        className={`items-center justify-center flex ${
-          withText ? "w-40 h-40" : ""
+        className={`items-center justify-center flex aspect-square h-fit p-0 ${
+          withText ? "w-40 h-20" : " w-20 "
         } `}
       >
         <motion.div
@@ -23,7 +23,7 @@ const Icon = ({ withText }) => {
             stiffness: 20,
             damping: 10,
           }}
-          className=" w-10 h-10 flex justify-center items-center"
+          className=" w-10 h-10 flex justify-center items-center "
         >
           {withText && (
             <span className="text-[--primary-text] font-bold text-2xl  z-50 text-shadow-xl">
@@ -48,8 +48,8 @@ const Icon = ({ withText }) => {
 
               // border: "1px solid #fff",
             }}
-            className="bg-[--vintage-orange-50]"
-            height={80}
+            className="bg-[--vintage-teal-50]"
+            height={100}
             width={100}
             alt="icon image"
             src="/e.png"
@@ -87,7 +87,7 @@ const Icon = ({ withText }) => {
               // border: "1px solid #fff",
             }}
             alt="icon image"
-            className="bg-[--vintage-orange-50]"
+            className="bg-[--vintage-teal-50]"
             height={100}
             width={100}
             priority

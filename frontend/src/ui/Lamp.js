@@ -2,7 +2,7 @@ import { cn } from "@/utils/cn";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 
-export const LampContainer = ({ children, className }) => {
+export const Lamp = ({ children, className }) => {
   const router = useRouter();
   const handleClick = () => {
     router.push("/saloon");

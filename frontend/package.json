@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.0.15",
+    "@phosphor-icons/web": "^2.0.3",
     "@radix-ui/react-label": "^2.0.2",
     "@tabler/icons-react": "^2.47.0",
     "clsx": "^2.1.0",
