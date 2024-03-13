@@ -1,10 +1,10 @@
 "use client";
-import SettingsShape from "@/components/SettingsComponent/PopupMenu";
+import SettingsShape from "@/components/userComponent/SettingsComponent/PopupMenu";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
 const BurgerMenu = () => {
-  const [openMenu, setOpenMenu] = useState(false);
+  const [openMenu, setOpenMenu] = useState(true);
 
   return (
     <div className="max-h-screen flex overflow-hidden">

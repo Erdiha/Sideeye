@@ -20,7 +20,7 @@ function PopupMenu({ openMenu, setOpenMenu }) {
     {
       label: "Profile",
       icon: <UserGear size={sizes} />,
-      href: "/profile",
+      href: "/user",
     },
     {
       label: "Reopen App",
@@ -40,7 +40,7 @@ function PopupMenu({ openMenu, setOpenMenu }) {
   ];
 
   const styleButton =
-    "w-full md:h-1/5 flex rounded py-4 pr-4 pl-2 justify-between items-center border-b border-b-[--primary-dark-50]";
+    "w-full md:h-full flex rounded p-1 justify-between items-center border-b border-b-[--primary-dark-50]";
   const styleWrapper =
     "w-full h-full md:p-5 p-2 flex flex-col text-[--primary-text] text-sm justify-around md:gap-[2rem] items-start md:mt-[3rem] mt-2";
 
@@ -75,7 +75,7 @@ function PopupMenu({ openMenu, setOpenMenu }) {
               boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.2)",
               scale: 1.1,
             }}
-            className={"w-full h-full flex justify-between"}
+            className={"w-full h-full flex justify-between p-2"}
             transition={{
               duration: 0.3,
               ease: [0.4, 0, 0.2, 1],

@@ -1,5 +1,5 @@
-import StatsCard from "@/components/profileComponent/StatsCard";
-import { createThumbnailMarker } from "@/components/profileComponent/Thumbnail";
+import StatsCard from "@/components/userComponent/profileComponent/StatsCard";
+import { createThumbnailMarker } from "@/components/userComponent/profileComponent/Thumbnail";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { useEffect } from "react";
