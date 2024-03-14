@@ -1,10 +1,10 @@
+import Navbar from "@/components/navComponent/Navbar";
 import StatsCard from "@/components/userComponent/profileComponent/StatsCard";
 import { createThumbnailMarker } from "@/components/userComponent/profileComponent/Thumbnail";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { useEffect } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
-
 const Map = ({ mapRef, currentPosition, setCurrentPosition, markers }) => {
   useEffect(() => {
     if (mapRef.current && !currentPosition) {
@@ -45,6 +45,7 @@ const Map = ({ mapRef, currentPosition, setCurrentPosition, markers }) => {
           </Marker>
         );
       })}
+      <Navbar />
     </MapContainer>
   );
 };

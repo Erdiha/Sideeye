@@ -16,17 +16,17 @@ import { useState } from "react";
 function Page() {
   const images = ["/me.jpg", "/e.png", "/sideeye1.png", "sideeye5.png"];
   const [hoveredIndex, setHoveredIndex] = useState(-1);
-  const sizes = 20;
+  const sizes = 24;
   const imageSettings = [
     {
       label: "Change Image",
-      icon: <Swap size={sizes} />,
+      icon: <Swap size={sizes} fontWeight="bold" />,
       onClick: () => alert("Change Profile Picture clicked"),
     },
 
     {
       label: "Make Profile",
-      icon: <UserRectangle size={sizes} />,
+      icon: <UserRectangle size={sizes} fontWeight="bold" />,
       onClick: () => alert("Make Profile Picture clicked"),
     },
     {
@@ -36,7 +36,7 @@ function Page() {
     },
     {
       label: "Delete Image",
-      icon: <TrashSimple size={sizes} />,
+      icon: <TrashSimple size={sizes} color="red" fontWeight="bold" />,
       onClick: () => alert("Delete Profile Picture clicked"),
     },
   ];
@@ -75,7 +75,7 @@ function Page() {
                       ? "3px solid var(--primary-dark-50)"
                       : "",
                 }}
-                className="flex justify-evenly items-center gap-2 w-full h-full rounded-sm"
+                className="flex justify-evenly items-center gap-2 w-full h-full rounded-sm text-[8px]"
                 onClick={item.onClick}
               >
                 {item.label}
@@ -91,7 +91,7 @@ function Page() {
   return (
     <div className="max-w-screen max-h-screen h-screen flex flex-col z-[999] justify-center items-center bg-gradient-to-b  from-[--primary-dark] to-black">
       <div className="md:w-[50rem] md:max-w-[50dvw] h-[100%] relative flex flex-col">
-        <section className="w-full h-[calc(100%-4rem)]  bg-gray-300 flex flex-col">
+        <section className="w-full h-[100%]  bg-gray-300 flex flex-col">
           <Link
             className="md:hover:scale-110 transition-all ease-in-out duration-500 z-[9999] absolute bg-[--primary-dark] rounded-full p-2 text-[--primary-text] w-10 h-10 top-5 left-5 text-center"
             href="/saloon"
