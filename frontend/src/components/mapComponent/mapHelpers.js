@@ -12,7 +12,7 @@ export const handleFocusCurrentLocation = ({
       (position) => {
         const { coords } = position;
         setCurrentPosition([coords.latitude, coords.longitude]);
-
+        
         if (mapRef.current) {
           mapRef.current.flyTo(currentPosition, 18); // Adjust zoom level as needed
         }

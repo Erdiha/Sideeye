@@ -15,7 +15,7 @@ function PopupMenu({ openMenu, setOpenMenu }) {
     {
       label: "Account Settings",
       icon: <FadersHorizontal size={sizes} />,
-      onClick: () => alert("Account Settings clicked"),
+      href: "/account",
     },
     {
       label: "Profile",

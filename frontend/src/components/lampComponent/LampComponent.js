@@ -1,6 +1,6 @@
 import Icon from "@/ui/Icon";
 import { motion } from "framer-motion";
-import { Lamp } from "../ui/Lamp";
+import { Lamp } from "./Lamp";
 
 export default function LampComponent() {
   return (
