@@ -1,10 +1,10 @@
 "use client";
-import SettingsShape from "@/components/userComponent/SettingsComponent/PopupMenu";
+import SettingsShape from "@/components/userComponent/popup/PopupMenu";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
 const BurgerMenu = () => {
-  const [openMenu, setOpenMenu] = useState(true);
+  const [openMenu, setOpenMenu] = useState(false);
 
   return (
     <div className="max-h-screen flex overflow-hidden">
@@ -21,22 +21,20 @@ const BurgerMenu = () => {
         <motion.span
           animate={
             openMenu
-              ? { rotate: 45, translateY: "0.5rem" }
+              ? { rotate: 45, translateY: "0.4rem" }
               : { rotate: 0, translateY: 0 }
           }
-          className="flex w-full bg-white rounded-sm"
+          className="flex w-full bg-white "
           style={{ height: openMenu ? "25%" : "33.3%" }}
         ></motion.span>
-        {!openMenu && (
-          <span className="block w-full h-1/3 bg-white rounded-sm"></span>
-        )}
+        {!openMenu && <span className="block w-full h-1/3 bg-white "></span>}
         <motion.span
           animate={
             openMenu
-              ? { rotate: -45, translateY: "-0.4rem" }
+              ? { rotate: -45, translateY: "-0.3rem" }
               : { rotate: 0, translateY: 0 }
           }
-          className="block w-full bg-white rounded-sm"
+          className="block w-full bg-white "
           style={{ height: openMenu ? "25%" : "33.3%" }}
         ></motion.span>
       </motion.div>

@@ -35,6 +35,7 @@ const Input = React.forwardRef(({ className, type, ...props }, ref) => {
       className="p-[2px] rounded-lg transition duration-300 group/input"
     >
       <input
+        type={type}
         className={
           `flex h-10 w-full  border-none bg-gray-50 dark:bg-zinc-800 text-black 
           dark:text-white shadow-input rounded-md  text-sm \
