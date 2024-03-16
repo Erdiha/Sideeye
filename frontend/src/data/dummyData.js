@@ -24,9 +24,9 @@ export const dummyProfiles = [
     interests: ["hiking", "technology", "travel"],
     photos: [
       { url: "/me.jpg", is_main: true },
-      { url: "alex_hiking.jpg", is_main: false },
-      { url: "alex_travel.jpg", is_main: false },
-      { url: "alex_tech.jpg", is_main: false },
+      { url: "/alex_hiking.jpg", is_main: false },
+      { url: "/alex_travel.jpg", is_main: false },
+      { url: "/alex_tech.jpg", is_main: false },
     ],
     last_active: "2024-03-15T08:30:00Z",
     online_status: "offline",

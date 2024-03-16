@@ -108,6 +108,10 @@
   .tooltip:hover .tooltiptext {
     visibility: visible;
   }
+  .leaflet-popup-content-wrapper .leaflet-popup-content{
+    background: red!important;
+    background-color: red!important;
+  }
 }
 
 

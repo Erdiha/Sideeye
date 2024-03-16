@@ -1,11 +1,11 @@
 import Navbar from "@/components/navComponent/Navbar";
 import StatsCard from "@/components/userComponent/profile/StatsCard";
+import Thumbnail from "@/components/userComponent/profile/Thumbnail";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { useEffect } from "react";
 import ReactDOMServer from "react-dom/server";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
-import Thumbnail from "@/components/userComponent/profile/Thumbnail";
 
 const MapComponent = ({
   mapRef,
@@ -54,6 +54,7 @@ const MapComponent = ({
             key={marker.id}
             position={[marker.location.latitude, marker.location.longitude]}
             icon={customIcon}
+            className="bg-black"
           >
             <Popup className="custom-popup bg-slate-950">
               <StatsCard data={marker} />
