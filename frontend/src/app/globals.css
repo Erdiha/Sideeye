@@ -3,24 +3,20 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 45, 52, 54;
-  --background-start-rgb: 236, 240, 241;
-  --background-end-rgb: 255, 255, 255;
   --primary-dark: rgb(44, 62, 80);
-  --secondary-coral: #ff6b6b;
+  --primary-coral: #ff6b6b;
   --accent-teal: #1abc9c;
   --background-off-white: #ecf0f1;
   --text-dark-slate-gray: #2d3436;
-  --primary-dark2:#1F2544;
-  --primary-text:#FEFBF6;
-  --vintage-orange:#ECB159;
-  --vintage-brown:rgb(182, 115, 82);  
-  --vintage-brown:rgb(182, 115, 82);
-  --vintage-teal-50: rgb(6, 182, 212,0.6);
-  --dark-teal:#265073;
+  --primary-dark2: #1f2544;
+  --primary-text: #fefbf6;
+  --vintage-orange: #ecb159;
+  --vintage-brown: rgb(182, 115, 82);
+  --vintage-teal-50: rgb(6, 182, 212, 0.6);
+  --dark-teal: #265073;
   --primary-dark-50: rgb(64, 82, 100);
+  --primary-dark-25: #0e3150;
 }
-
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -30,26 +26,46 @@
   }
 }
 
-
-@layer components{
-  .leaflet-popup-content-wrapper {
-     background-color: var(--primary-dark);
-    border: 0px solid #ccc;
-    padding: 0!important;
-    border-radius: 5px;
-    margin: 0!important;
-    display: flex; 
+@layer components {
+  .chatWrapper {
+    box-shadow: 0px 0px 5px 5px var(--vintage-teal-50);
+    @apply md:w-[70vw] w-[100dvw]  3xl:w-[40dvw] h-[100dvh] md:h-[80vh] bottom-0 flex flex-col border-4 border-[--primary-dark-50] max-w-[35rem] bg-[--primary-dark] overflow-hidden sticky;
   }
-  
-  .popupCard 
-  {
+  .my-container-class {
+    @apply md:w-[70vw] w-screen  3xl:w-[40dvw] h-full  relative flex flex-col border-4 border-[--dark-teal] 3xl:max-w-[35rem];
+  }
+  .my-content-class {
+    @apply w-full h-full m-0 mt-0 p-0 pt-0;
+  }
+
+  .my-tabs-class {
+    background-color: orange !important;
+  }
+  .leaflet-popup-content-wrapper {
+    background-color: var(--primary-dark);
+    border: 0px solid #ccc;
+    padding: 0 !important;
+    border-radius: 5px;
+    margin: 0 !important;
+    display: flex;
+  }
+
+  .popupCard {
     border: solid 5px #265073;
     background-color: hsl(349, 14%, 46%);
-    clip-path: polygon(100% 10%, 100% 10%, 100% 100%, 0 100%, 0 10%, 80% 10%, 100% 0%);
+    clip-path: polygon(
+      100% 10%,
+      100% 10%,
+      100% 100%,
+      0 100%,
+      0 10%,
+      80% 10%,
+      100% 0%
+    );
     position: absolute;
     z-index: 40;
-    top:3.5rem;
-    right:3.5rem;
+    top: 3.5rem;
+    right: 3.5rem;
     max-width: 20rem;
     width: 75%;
     height: fit-content;
@@ -57,20 +73,19 @@
     background-color: var(--primary-dark);
     overflow-y: auto;
   }
-  @media screen and (max-width:768px) {
-    .popupCard{
+  @media screen and (max-width: 768px) {
+    .popupCard {
       clip-path: none;
       max-width: 90%;
-      height:70%;
-      max-height:70%;
+      height: 70%;
+      max-height: 70%;
       padding-top: 0;
       padding: 0;
       max-width: 90%;
-      top:4rem;
-      right:1.5rem;
+      top: 4rem;
+      right: 1.5rem;
       overflow-y: hidden;
     }
-   
   }
 }
 
@@ -78,40 +93,95 @@
   .text-balance {
     text-wrap: balance;
   }
+  .tippy-box[data-theme="large"] {
+    font-size: 18px;
+  }
+
+  .tippy-box[data-theme="regular"] {
+    font-size: 14px;
+  }
+
   .tooltip {
     position: absolute;
     display: inline-block;
     width: 100%;
     height: 100%;
-   
   }
-/* Tooltip text */
-.tooltip .tooltiptext {
-  visibility: hidden;
-  min-width: fit-content;
-  width: max-content;
-  background-color: black;
-  color: #fff;
-  text-align: center;
-  padding: 5px 5px;
+  /* Tooltip text */
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    min-width: fit-content;
+    width: max-content;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 5px;
 
-  border-radius: 6px;
-  font-size: xx-small;
-  /* Position the tooltip text - see examples below! */
-  position: absolute;
-  z-index: 1;
-  transform: translate(-100%, -100%);
+    border-radius: 6px;
+    font-size: xx-small;
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+    transform: translate(-100%, -100%);
+  }
+
+  .tippy-box[data-theme="large"] .tippy-content {
+    font-size: 18px;
+  }
+
+  .tippy-box[data-theme="regular"] .tippy-content {
+    font-size: 14px;
+  }
+
+  .chatBubbleUser {
+    -webkit-clip-path: polygon(
+      0% 0%,
+      100% 0,
+      95% 20%,
+      95% 100%,
+      95% 100%,
+      0% 100%,
+      0% 100%
+    );
+    clip-path: polygon(
+      0% 0%,
+      100% 0,
+      95% 20%,
+      95% 100%,
+      95% 100%,
+      0% 100%,
+      0% 100%
+    );
+  }
+
+  .chatBubbleFriend {
+    -webkit-clip-path: polygon(
+      0% 0%,
+      100% 0%,
+      100% 100%,
+      0% 100%,
+      5% 100%,
+      5% 100%,
+      5% 20%
+    );
+
+    clip-path: polygon(
+      0% 0%,
+      100% 0%,
+      100% 100%,
+      0% 100%,
+      5% 100%,
+      5% 100%,
+      5% 20%
+    );
+  }
+  .no-visible-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .no-visible-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
 }
-
-  
-  /* Show the tooltip text when you mouse over the tooltip container */
-  .tooltip:hover .tooltiptext {
-    visibility: visible;
-  }
-  .leaflet-popup-content-wrapper .leaflet-popup-content{
-    background: red!important;
-    background-color: red!important;
-  }
-}
-
-

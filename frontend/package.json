@@ -14,10 +14,11 @@
     "@phosphor-icons/web": "^2.0.3",
     "@radix-ui/react-label": "^2.0.2",
     "@tabler/icons-react": "^2.47.0",
+    "@tippyjs/react": "^4.2.6",
     "aws-amplify": "^6.0.20",
     "clsx": "^2.1.0",
     "formik": "^2.4.5",
-    "framer-motion": "^11.0.8",
+    "framer-motion": "^11.0.14",
     "leaflet": "^1.9.4",
     "leaflet-defaulticon-compatibility": "^0.1.2",
     "next": "14.1.1",
@@ -26,7 +27,8 @@
     "react-element-to-jsx-string": "^15.0.0",
     "react-leaflet": "^4.2.1",
     "sonner": "^1.4.3",
-    "tailwind-merge": "^2.2.1"
+    "tailwind-merge": "^2.2.2",
+    "tippy.js": "^6.3.7"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.18",
