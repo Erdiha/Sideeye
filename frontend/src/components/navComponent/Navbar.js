@@ -33,7 +33,7 @@ const Navbar = ({ mapRef, currentPosition, setCurrentPosition }) => {
             <Link href="/">Home</Link>
           </li>
           <li>
-            <Link href="/about">Chats</Link>
+            <Link href="/chats">Chats</Link>
           </li>
         </ul>
 

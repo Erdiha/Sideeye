@@ -42,7 +42,12 @@ const MapComponent = ({
         const customIcon = L.divIcon({
           className: "custom-thumbnail-icon",
           html: ReactDOMServer.renderToString(
-            <Thumbnail text={marker.id} imgSrc={marker?.photos[0].url} />
+            <Thumbnail
+              type="profile"
+              text={marker.id}
+              imgSrc={marker?.photos[0].url}
+              user="current"
+            />
           ),
           iconSize: [40, 40],
           iconAnchor: [20, 40], // Adjust iconAnchor to center the icon
