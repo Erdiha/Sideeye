@@ -1,28 +1,28 @@
-import Icon from "@/ui/Icon";
-import { motion } from "framer-motion";
-import { Lamp } from "./Lamp";
+import { useEffect, useState } from "react";
 
 export default function LampComponent() {
-  return (
-    <div>
-      <Lamp>
-        <Icon withText={true} />
+  const [profiles, setProfiles] = useState([]);
 
-        <motion.h1
-          initial={{ opacity: 0.5, y: 100 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{
-            delay: 0.3,
-            duration: 0.8,
-            ease: "easeInOut",
-          }}
-          className="mt-8 bg-gradient-to-br from-slate-300 to-slate-500 py-4 bg-clip-text text-start 
-          text-4xl font-medium tracking-tight text-transparent md:text-5xl"
-        >
-          Your Business, <br /> Is yours!
-        </motion.h1>
-      </Lamp>
+  useEffect(() => {
+    fetch("http://localhost:8000/api/profiles/") // Update the URL to match your Django API endpoint
+      .then((response) => response.json())
+      .then((data) => setProfiles(data.profiles))
+      .catch((error) => console.error("Error fetching profiles:", error));
+  }, []);
+  console.log("profiles", profiles);
+  return (
+    <div className="w-full h-screen flex bg-red-200 flex-col">
+      <h1 className="text-bold text-3xl p-3">Profiles</h1>
+      <ul className="w-full h-full flex flex-col bg-orange-300">
+        {profiles?.map((profile) => (
+          <li
+            className="text-black text-xl flex justify-center items-center"
+            key={profile.id}
+          >
+            aaa {profile.name} - {profile.email}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

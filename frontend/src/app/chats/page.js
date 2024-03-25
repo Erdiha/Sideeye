@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 function Chats() {
   const [showChat, setShowChat] = useState(false); // State to toggle between chat list and chat view on mobile
   const chatPageRef = useRef(null);
+
   const hookObject = {
     showChat,
     setShowChat,
@@ -28,13 +29,13 @@ function Chats() {
       content: <Chat showChat={showChat} setShowChat={setShowChat} />,
     },
   ];
+
   const scrollToBottom = () => {
-    if (chatPageRef.current) {
+    if (typeof window !== "undefined" && chatPageRef.current) {
       const { scrollHeight } = chatPageRef.current;
       chatPageRef.current.scroll({
         top: scrollHeight,
         behavior: "smooth",
-        Animation,
       });
     }
   };
