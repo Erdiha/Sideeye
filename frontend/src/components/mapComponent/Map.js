@@ -1,4 +1,3 @@
-import Navbar from "@/components/navComponent/Navbar";
 import StatsCard from "@/components/userComponent/profile/StatsCard";
 import Thumbnail from "@/components/userComponent/profile/Thumbnail";
 import L from "leaflet";
@@ -67,7 +66,6 @@ const MapComponent = ({
           </Marker>
         );
       })}
-      <Navbar />
     </MapContainer>
   );
 };

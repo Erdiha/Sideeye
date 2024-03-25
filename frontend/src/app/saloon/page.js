@@ -1,11 +1,14 @@
 "use client";
-import MapComponent from "@/components/mapComponent/Map";
 import { handleFocusCurrentLocation } from "@/components/mapComponent/mapHelpers";
 import BurgerMenu from "@/components/navComponent/BurgerMenu";
 import Navbar from "@/components/navComponent/Navbar";
 import { dummyProfiles } from "@/data/dummyData";
+import dynamic from "next/dynamic";
 import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
+const MapComponent = dynamic(() => import("@/components/mapComponent/Map"), {
+  ssr: false,
+});
 
 const Saloon = () => {
   const mapRef = useRef(null);

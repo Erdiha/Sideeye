@@ -1,9 +1,10 @@
 "use client";
-import LampComponent from "../components/lampComponent/LampComponent";
-export default function Home() {
+import Saloon from "@/app/saloon/page";
+
+export default function Home({ isAuthenticated }) {
   return (
     <>
-      <LampComponent />
+      <Saloon />
     </>
   );
 }

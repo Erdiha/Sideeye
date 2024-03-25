@@ -1,3 +1,4 @@
+import Thumbnail from "../userComponent/profile/Thumbnail";
 import Chat from "./Chat";
 
 function ChatList({ ...hookObject }) {
@@ -10,9 +11,13 @@ function ChatList({ ...hookObject }) {
       >
         <h1 className="text-[--primary-text] w-full h-fit border-b-2">CHATS</h1>
         <ul className="w-full h-full flex flex-col gap-2 justify-center items-center">
-          <li className="bg-[--primary-dark] text-[--primary-text] w-[10rem] h-fit flex justify-start items-center  p-2  rounded translate-x-[100%] shadow-2xl border-4 border-[--vintage-teal-50] absolute">
-            Abba
-          </li>
+          <div className="bg-[--primary-dark] text-[--primary-text] w-[10rem] h-fit flex items-center justify-center p-2  translate-x-[100%] border-2  absolute rounded-full">
+            <span className="flex absolute -left-0">
+              <Thumbnail type="chatlist" imgSrc="/me.jpg" />
+            </span>
+            <li className="relative">Abba</li>
+          </div>
+
           <li className="bg-gray-300 w-full h-fit flex justify-center items-center ">
             Babba
           </li>
