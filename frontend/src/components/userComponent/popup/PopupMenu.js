@@ -6,10 +6,37 @@ import {
   SignOut,
   UserGear,
 } from "@phosphor-icons/react";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 function PopupMenu({ openMenu, setOpenMenu }) {
+  const router = useRouter(); // Initialize the useRouter hook
+
+  const supabase = createClientComponentClient();
+  const [logoutInfor, setLogoutInfo] = useState({
+    errror: "",
+    status: "",
+  });
+
+  const handleLogout = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      setLogoutInfo({
+        error: error.message,
+        status: "error",
+      });
+    } else {
+      setLogoutInfo({
+        error: "",
+        status: "success",
+      });
+      router.push("/login"); // Redirect to the login page after successful logout
+    }
+  };
+
   const sizes = 20;
   const buttons = [
     {
@@ -35,7 +62,7 @@ function PopupMenu({ openMenu, setOpenMenu }) {
     {
       label: "Logout",
       icon: <SignOut size={sizes} />,
-      onClick: () => alert("Logout clicked"),
+      onClick: handleLogout,
     },
   ];
 

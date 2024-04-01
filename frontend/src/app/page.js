@@ -1,10 +1,11 @@
 "use client";
-import Saloon from "@/app/saloon/page";
+import Landing from "./landing/page";
 
 export default function Home({ isAuthenticated }) {
   return (
     <>
-      <Saloon />
+      <Landing />
     </>
   );
 }
+ 
