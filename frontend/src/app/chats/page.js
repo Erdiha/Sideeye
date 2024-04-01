@@ -1,6 +1,5 @@
 "use client";
 import Chat from "@/components/chatComponent/Chat";
-import ChatList from "@/components/chatComponent/ChatList";
 import { useEffect, useRef, useState } from "react";
 
 function Chats() {
@@ -51,25 +50,7 @@ function Chats() {
       id="chatPage"
       className=" flex items-center justify-evenly w-screen  h-screen flex-col bg-[--primary-dark] border-red-500 border-3"
     >
-      {/* <Tippy animation="fade" content="Go Home">
-        <Link
-          href="/saloon"
-          className=" flex self-start justify-center items-center rounded-full my-3 mx-4  border-2 border-gray-300 h-10  aspect-square
-          bg-[--primary-dark] fixed top-0"
-        >
-          <House color="white" weigth="bold" size={20} />
-        </Link>
-      </Tippy> */}
-      <ChatList {...hookObject} />
-      {/* <Tabs
-        tabs={chatsData}
-        containerClassName="my-container-class"
-        activeTabClassName="my-active-tab-class"
-        tabClassName="my-tab-class"
-        contentClassName="my-content-class"
-        showChat={showChat}
-        setShowChat={setShowChat}
-      /> */}
+      <Chat {...hookObject} />
     </div>
   );
 }
