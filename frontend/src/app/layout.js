@@ -1,20 +1,27 @@
 import "leaflet/dist/leaflet.css";
 import { Inter } from "next/font/google";
-import Head from "next/head";
+import { AuthProvider } from "../../auth/AuthProvider.js";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  // const {
+  //   data: { user },
+  // } = await supabase.auth.getUser();
+  // console.log("usersssss",user);
+
   return (
-    <html lang="en">
-      <Head>
-        <title>SideEYE</title>
-        <meta name="description" content="" />
-      </Head>
-      <body className={inter.className}>
-        <main>{children}</main>
-      </body>
-    </html>
+    <AuthProvider>
+      <html lang="en">
+        <body className={inter.className}>
+          <main>{children}</main>
+          <Toast /> {/* Include the Toast component */}
+        </body>
+      </html>
+    </AuthProvider>
   );
 }
+export const metadata = {
+  title: "SideEYE",
+};
