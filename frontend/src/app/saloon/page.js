@@ -6,6 +6,9 @@ import { dummyProfiles } from "@/data/dummyData";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
+
+/////// SECTION - MAIN
+
 const MapComponent = dynamic(() => import("@/components/mapComponent/Map"), {
   ssr: false,
 });

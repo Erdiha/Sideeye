@@ -23,7 +23,7 @@ CREATE TABLE photos (
 );
 
 -- Create the health_info table
-CREATE TABLE health_info (
+CREATE TABLE health_info ( 5
     user_id INTEGER REFERENCES users(id),
     hiv_status VARCHAR(20),
     last_tested_date DATE,

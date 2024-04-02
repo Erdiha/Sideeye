@@ -1,10 +1,14 @@
 "use client";
 
+
 import CustomTooltip from "@/ui/Tippy";
 import { ArrowLeft, PaperPlaneTilt, Plus } from "@phosphor-icons/react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import Tippy from "@tippyjs/react";
 import { useRouter } from "next/navigation";
+
+import Chat from "@/components/chatComponent/Chat";
+
 import { useEffect, useRef, useState } from "react";
 import { useAuth } from "../../../auth/AuthProvider";
 import { useWindowSize } from "../utilityComponents/Windowsize";
@@ -115,6 +119,7 @@ function Chat({ showChat, setShowChat }) {
   }, [messages]);
 
   return (
+
     <div ref={chatWrapperRef} className="chatWrapper">
       {/*back button an dinfo goes here*/}
       <section className="flex items-center p-4 border-b-4 border-b-[--primary-dark-50]">
@@ -166,6 +171,14 @@ function Chat({ showChat, setShowChat }) {
           </button>
         </CustomTooltip>
       </section>
+
+    <div
+      ref={chatPageRef}
+      id="chatPage"
+      className=" flex items-center justify-evenly w-screen  h-screen flex-col bg-[--primary-dark] border-red-500 border-3"
+    >
+      <Chat {...hookObject} />
+
     </div>
   );
 }

@@ -1,0 +1,45 @@
+:root {
+  --primary-dark: rgb(44, 62, 80);
+  --primary-coral: #ff6b6b;
+  --accent-teal: #1abc9c;
+  --background-off-white: #ecf0f1;
+  --text-dark-slate-gray: #2d3436;
+  --primary-dark2: #1f2544;
+  --primary-text: #fefbf6;
+  --vintage-orange: #ecb159;
+  --vintage-brown: rgb(182, 115, 82);
+  --vintage-teal-50: rgb(6, 182, 212, 0.6);
+  --dark-teal: #265073;
+  --primary-dark-50: rgb(64, 82, 100);
+  --primary-dark-25: #0e3150;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  position: relative;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  background-color: var(--primary-dark);
+  cursor: pointer;
+  border-radius: 50%;
+}

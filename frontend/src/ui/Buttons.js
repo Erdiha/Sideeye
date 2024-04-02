@@ -27,3 +27,30 @@ export const NavFocusButton = ({
     </>
   );
 };
+
+export const ModalButton = ({
+  text,
+  size,
+  deletePressed,
+  setDeletePressed,
+  func,
+  icon,
+  closeButton,
+}) => {
+  return (
+    <motion.button
+      onClick={() => {
+        func();
+      }}
+      whileHover={{ scale: 1.1, borderColor: "#f87171" }}
+      transition={{ duration: 0.2, ease: "easeInOut" }}
+      className="justify-center gap-2 items-center shadow-lg w-fit h-fit mt-5 rounded border-[1px] md:ml-none z-50 flex relative px-2 py-1 
+      bg-[var(--primary-dark)] 
+      text-[var(--primary-text)]"
+      style={{ transformOrigin: "center" }}
+    >
+      {text}
+      {icon}
+    </motion.button>
+  );
+};
