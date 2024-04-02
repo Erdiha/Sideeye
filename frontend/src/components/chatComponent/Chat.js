@@ -2,9 +2,14 @@
 
 import CustomTooltip from "@/ui/Tippy";
 import { ArrowLeft, PaperPlaneTilt, Plus } from "@phosphor-icons/react";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import Tippy from "@tippyjs/react";
 import { useRouter } from "next/navigation";
+
+import { useEffect, useRef, useState } from "react";
+
 import { useEffect, useRef } from "react";
+
 import { useAuth } from "../../../auth/AuthProvider";
 import { useWindowSize } from "../utilityComponents/Windowsize";
 import { ChatBubbleCurrentUser, ChatBubbleFriend } from "./ChatBubbles";
@@ -16,7 +21,27 @@ function Chat({ showChat, setShowChat }) {
   const getSize = useWindowSize();
   const router = useRouter();
   const { user } = useAuth();
+
+  const [getData, setGetData] = useState();
+  const supabase = createClientComponentClient();
+  useEffect(() => {
+    const getUser = async () => {
+      const { data, error } = await supabase.auth.getUser();
+
+      if (error) {
+        console.error("Error fetching user:", error);
+      } else {
+        console.log("User data:", data);
+        setGetData(data);
+      }
+    };
+
+    getUser();
+  }, []);
+  console.log("user", getData);
+
   console.log("user", user);
+
   const messages = [
     { id: 1, text: "Hello, how are you? sdfsd sdfdssdfdsf", sender: "User" },
     { id: 2, text: "I'm good, thanks! How about you?", sender: "Friend" },
