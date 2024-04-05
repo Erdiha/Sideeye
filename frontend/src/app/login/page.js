@@ -65,10 +65,21 @@ export default function LoginForm() {
     if (error) {
       console.error(error);
     } else {
-      setUser(user);
-      router.refresh(); // Reload the current page
-      setCredentials({ email: "", password: "" });
-      router.push("/saloon"); // Redirect to the saloon page
+      // Insert user data into the users table
+      const { error: insertError } = await supabase
+        .from("users")
+        .insert([
+          { id: user.id, email: user.email /*, other fields if needed */ },
+        ]);
+
+      if (insertError) {
+        console.error("Error inserting user data:", insertError);
+      } else {
+        setUser(user);
+        router.refresh(); // Reload the current page
+        setCredentials({ email: "", password: "" });
+        router.push("/saloon"); // Redirect to the saloon page
+      }
     }
   };
 

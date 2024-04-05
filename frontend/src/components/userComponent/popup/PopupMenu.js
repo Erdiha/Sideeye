@@ -6,35 +6,38 @@ import {
   SignOut,
   UserGear,
 } from "@phosphor-icons/react";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useAuth } from "../../../../auth/AuthProvider";
+import { showToast } from "../../../ui/Toast";
 
 function PopupMenu({ openMenu, setOpenMenu }) {
   const router = useRouter(); // Initialize the useRouter hook
+  const { user, session, signOut } = useAuth();
 
-  const supabase = createClientComponentClient();
   const [logoutInfor, setLogoutInfo] = useState({
     errror: "",
     status: "",
   });
 
   const handleLogout = async () => {
-    const { error } = await supabase.auth.signOut();
+    const { error } = await signOut();
     if (error) {
       setLogoutInfo({
         error: error.message,
         status: "error",
       });
+      showToast(error.message, { type: "error" });
     } else {
       setLogoutInfo({
         error: "",
         status: "success",
       });
-      router.push("/login"); // Redirect to the login page after successful logout
+      showToast("Logged out successfully", { type: "success" });
     }
+    router.push("/login");
   };
 
   const sizes = 20;

@@ -1,7 +1,9 @@
 import Thumbnail from "../userComponent/profile/Thumbnail";
 
 function ChatList({ ...hookObject }) {
-  const users = ["a", "b", "c", "d"];
+  const { allUsers, user, session } = hookObject;
+  console.log("user in chatlist", allUsers, user, session);
+
   return (
     <main className="w-full h-full flex relative  items-center">
       <section className=" hidden md:flex w-40 h-full  p-2  justify-center items-center flex-col md:h-[80vh]">

@@ -2,94 +2,44 @@
 
 import CustomTooltip from "@/ui/Tippy";
 import { ArrowLeft, PaperPlaneTilt, Plus } from "@phosphor-icons/react";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import Tippy from "@tippyjs/react";
 import { useRouter } from "next/navigation";
 
 import { useEffect, useRef, useState } from "react";
-
-import { useEffect, useRef } from "react";
 
 import { useAuth } from "../../../auth/AuthProvider";
 import { useWindowSize } from "../utilityComponents/Windowsize";
 import { ChatBubbleCurrentUser, ChatBubbleFriend } from "./ChatBubbles";
 import ChatList from "./ChatList";
 
-function Chat({ showChat, setShowChat }) {
+function Chat(hookObjects) {
+  const { showChat, setShowChat, socket } = hookObjects;
   const chatWindowRef = useRef(null);
   const chatWrapperRef = useRef(null);
+  const [messages, setMessages] = useState([]);
   const getSize = useWindowSize();
   const router = useRouter();
-  const { user } = useAuth();
-
-  const [getData, setGetData] = useState();
-  const supabase = createClientComponentClient();
+  const { user, allUsers } = useAuth();
+  const [currentUserText, setCurrentUserText] = useState({
+    userId: "",
+    socketId: "",
+    message: "",
+  });
   useEffect(() => {
-    const getUser = async () => {
-      const { data, error } = await supabase.auth.getUser();
-
-      if (error) {
-        console.error("Error fetching user:", error);
-      } else {
-        console.log("User data:", data);
-        setGetData(data);
-      }
-    };
-
-    getUser();
+    // Scroll to bottom on component mount
+    scrollToBottomWrapper();
+    scrollToBottom();
   }, []);
-  console.log("user", getData);
 
-  console.log("user", user);
+  useEffect(() => {
+    // Scroll to bottom whenever messages change
+    scrollToBottom();
+  }, [messages]);
 
-  const messages = [
-    { id: 1, text: "Hello, how are you? sdfsd sdfdssdfdsf", sender: "User" },
-    { id: 2, text: "I'm good, thanks! How about you?", sender: "Friend" },
-    {
-      id: 3,
-      text: "I'm doing well. Excited to chat! zsfsdfsafa sdfdsfdsf sdfdsfds sdfdsfsdfds sdfdsf a aa aaa",
-      sender: "User",
-    },
-    {
-      id: 4,
-      text: "I'm also doing well. How about you? zxdfdsfsdfdsfsdfsdfsdfsdfsdfdsfsdfdsfdsf sdfsdfsdfsd",
-      sender: "Friend",
-    },
-    {
-      id: 5,
-      text: "dfgfdgfdgfd",
-      sender: "User",
-    },
-    {
-      id: 6,
-      text: "dfgfdgfdgfd",
-      sender: "Friend",
-    },
-    {
-      id: 7,
-      text: "dfgfdgfdgfd",
-      sender: "User",
-    },
-    {
-      id: 8,
-      text: "lkasjdfaskldjas lkadjlskajdsa askldjsk sdslks sdad",
-    },
-    {
-      id: 9,
-      text: "dfgfdgfdgfd",
-      sender: "Friend",
-    },
-    {
-      id: 10,
-      text: "dfgfdgfdgfd",
-      sender: "Friend",
-    },
-    {
-      id: 11,
-      text: "dfgfdgfdgfd sdfsdf vcbvc ytutyuty tyu tyuytu tyututy tu tyu tyuryer tyret ert ",
-      sender: "User",
-    },
-  ];
+  // Function to send a message
+  const sendMessage = (message) => {
+    socket.emit("chat message", message);
+  };
 
   const scrollToBottomWrapper = () => {
     if (chatWrapperRef.current) {
@@ -112,22 +62,51 @@ function Chat({ showChat, setShowChat }) {
     }
   };
 
-  useEffect(() => {
-    // Scroll to bottom on component mount
-    scrollToBottomWrapper();
-    scrollToBottom();
-  }, []);
+  const handleChange = (e) => {
+    console.log("handlechange", e.target.value);
 
-  useEffect(() => {
-    // Scroll to bottom whenever messages change
-    scrollToBottom();
-  }, [messages]);
+    setCurrentUserText({
+      ...currentUserText,
+      message: e.target.value,
+    });
+  };
+
+  // useDebouncedEffect(
+  //   () => {
+  //     alert("stopped typing");
+  //     const { userId, socketId, message } = currentUserText;
+  //     if (userId && socketId && message) {
+  //       sendMessage({ userId, socketId, message });
+  //       setCurrentUserText({
+  //         userid: "",
+  //         socketId: "",
+  //         message: "",
+  //       });
+  //     }
+  //   },
+  //   3000,
+  //   [currentUserText.message]
+  // );
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const { userId, socketId, message } = currentUserText;
+
+    sendMessage({ userId: user.id, socketId: socket.id, message });
+    setCurrentUserText({
+      userid: "",
+      socketId: "",
+      message: "",
+    });
+  };
+
+  console.log("message and users are", messages, allUsers);
   return (
     <div ref={chatWrapperRef} className=" flex chat rounded">
       {/*/////////////////////////////////////////*/}
       {/*chat list*/}
       <div className="w-1/8 h-full ">
-        <ChatList />
+        <ChatList hookObjects={hookObjects} />
       </div>
 
       {/*/////////////////////////////////////////*/}
@@ -179,10 +158,15 @@ function Chat({ showChat, setShowChat }) {
               className="p-2 bg-slate-800 text-md text-[--primary-text] font-normal w-full rounded-full pr-2"
               type="text"
               placeholder="type something..."
-            ></input>
+              onChange={handleChange}
+              value={currentUserText.message}
+            />
           </div>
           <CustomTooltip content="send">
-            <button className="rounded-full w-8 h-8 aspect-square items-center justify-center flex self-center">
+            <button
+              onClick={handleSubmit}
+              className="rounded-full w-8 h-8 aspect-square items-center justify-center flex self-center"
+            >
               <PaperPlaneTilt
                 className="w-full h-full border-[#8c90a8] border-[1px] rounded p-1"
                 weight="thin"
