@@ -6,7 +6,7 @@ import { dummyProfiles } from "@/data/dummyData";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
-
+import { Query } from "../../../server/db"; 
 /////// SECTION - MAIN
 
 const MapComponent = dynamic(() => import("@/components/mapComponent/Map"), {
@@ -18,6 +18,8 @@ const Saloon = () => {
   const [currentPosition, setCurrentPosition] = useState();
   const [menuOpen, setMenuOpen] = useState(false);
   const [markers, setMarkers] = useState(dummyProfiles);
+
+
 
   useEffect(() => {
     if (!currentPosition) {
