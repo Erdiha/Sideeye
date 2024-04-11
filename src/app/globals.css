@@ -9,6 +9,7 @@ html {
   overflow: hidden;
 }
 
+/* Define custom CSS variables */
 :root {
   --primary-dark: #2b3d4f;
   --primary-coral: #ff6b6b;
@@ -25,6 +26,7 @@ html {
   --primary-dark-25: #0e3150;
 }
 
+/* Dark mode */
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
@@ -33,188 +35,195 @@ html {
   }
 }
 
-@layer components {
-  .chatWrapper {
-    @apply md:w-[70vw] w-[100dvw] 3xl:w-[40dvw] md:h-[80vh] bottom-0 flex flex-col border-l-4 border-l-[--primary-dark-50] max-w-[35rem] bg-[--primary-dark] overflow-hidden sticky;
-  }
+/* ChatWrapper styles */
+.chatWrapper {
+  @apply md:w-[70vw] w-[100vw] 3xl:w-[40vw] md:h-[80vh] bottom-0 flex flex-col border-l-4 border-l-[--primary-dark-50] max-w-[35rem] bg-[--primary-dark] overflow-hidden sticky;
+}
 
-  .chat {
-    box-shadow: 0px 0px 5px 5px var(--vintage-teal-50);
-  }
+/* Chat styles */
+.chat {
+  box-shadow: 0px 0px 5px 5px var(--vintage-teal-50);
+}
 
-  .my-container-class {
-    @apply md:w-[70vw] w-screen  3xl:w-[40dvw] h-full  relative flex flex-col border-4 border-[--dark-teal] 3xl:max-w-[35rem];
-  }
-  .my-content-class {
-    @apply w-full h-full m-0 mt-0 p-0 pt-0;
-  }
+/* MyContainerClass styles */
+.my-container-class {
+  @apply md:w-[70vw] w-screen 3xl:w-[40vw] h-full relative flex flex-col border-4 border-[--dark-teal] 3xl:max-w-[35rem];
+}
 
-  .my-tabs-class {
-    background-color: orange !important;
-  }
-  .leaflet-popup-content-wrapper {
-    background-color: var(--primary-dark);
-    border: 0px solid #ccc;
-    padding: 0 !important;
-    border-radius: 5px;
-    margin: 0 !important;
-    display: flex;
-  }
+/* MyContentClass styles */
+.my-content-class {
+  @apply w-full h-full m-0 mt-0 p-0 pt-0;
+}
 
+/* MyTabsClass styles */
+.my-tabs-class {
+  background-color: orange !important;
+}
+
+/* Leaflet popup content wrapper styles */
+.leaflet-popup-content-wrapper {
+  background-color: var(--primary-dark);
+  border: 0px solid #ccc;
+  padding: 0 !important;
+  border-radius: 5px;
+  margin: 0 !important;
+  display: flex;
+}
+
+/* Popup card styles */
+.popupCard {
+  border: solid 5px #265073;
+  background-color: hsl(349, 14%, 46%);
+  clip-path: polygon(
+    100% 10%,
+    100% 10%,
+    100% 100%,
+    0 100%,
+    0 10%,
+    80% 10%,
+    100% 0%
+  );
+  position: absolute;
+  z-index: 40;
+  top: 3.5rem;
+  right: 3.5rem;
+  max-width: 20rem;
+  width: 75%;
+  height: fit-content;
+  max-height: 70vh;
+  background-color: var(--primary-dark);
+  overflow-y: auto;
+}
+
+/* Responsive styles for popup card */
+@media screen and (max-width: 767px) {
   .popupCard {
-    border: solid 5px #265073;
-    background-color: hsl(349, 14%, 46%);
-    clip-path: polygon(
-      100% 10%,
-      100% 10%,
-      100% 100%,
-      0 100%,
-      0 10%,
-      80% 10%,
-      100% 0%
-    );
-    position: absolute;
-    z-index: 40;
-    top: 3.5rem;
-    right: 3.5rem;
-    max-width: 20rem;
-    width: 75%;
-    height: fit-content;
-    max-height: 70dvh;
-    background-color: var(--primary-dark);
-    overflow-y: auto;
+    clip-path: none;
+    max-width: 90%;
+    height: 70%;
+    max-height: 70%;
+    padding-top: 0;
+    padding: 0;
+    max-width: 90%;
+    top: 4rem;
+    right: 1.5rem;
+    overflow-y: hidden;
   }
-  @media screen and (max-width: 767px) {
-    .popupCard {
-      clip-path: none;
-      max-width: 90%;
-      height: 70%;
-      max-height: 70%;
-      padding-top: 0;
-      padding: 0;
-      max-width: 90%;
-      top: 4rem;
-      right: 1.5rem;
-      overflow-y: hidden;
-    }
-    .chatWrapper {
-      height: 95dvh;
-    }
+
+  .chatWrapper {
+    height: 95vh;
   }
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-  .tippy-box[data-theme="large"] {
-    font-size: 18px;
-  }
+/* Custom utilities */
+.text-balance {
+  text-wrap: balance;
+}
 
-  .tippy-box[data-theme="regular"] {
-    font-size: 14px;
-  }
+.tippy-box[data-theme="large"] {
+  font-size: 18px;
+}
 
-  .tooltip {
-    position: absolute;
-    display: inline-block;
-    width: 100%;
-    height: 100%;
-  }
-  /* Tooltip text */
-  .tooltip .tooltiptext {
-    visibility: hidden;
-    min-width: fit-content;
-    width: max-content;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    padding: 5px 5px;
+.tippy-box[data-theme="regular"] {
+  font-size: 14px;
+}
 
-    border-radius: 6px;
-    font-size: xx-small;
-    /* Position the tooltip text - see examples below! */
-    position: absolute;
-    z-index: 1;
-    transform: translate(-100%, -100%);
-  }
+.tooltip {
+  position: absolute;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
 
-  .tippy-box[data-theme="large"] .tippy-content {
-    font-size: 18px;
-  }
+.tooltip .tooltiptext {
+  visibility: hidden;
+  min-width: fit-content;
+  width: max-content;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 5px;
+  border-radius: 6px;
+  font-size: xx-small;
+  position: absolute;
+  z-index: 1;
+  transform: translate(-100%, -100%);
+}
 
-  .tippy-box[data-theme="regular"] .tippy-content {
-    font-size: 14px;
-  }
+.tippy-box[data-theme="large"] .tippy-content {
+  font-size: 18px;
+}
 
-  .chatBubbleUser {
-    -webkit-clip-path: polygon(
-      0% 0%,
-      100% 0,
-      95% 20%,
-      95% 100%,
-      95% 100%,
-      0% 100%,
-      0% 100%
-    );
-    clip-path: polygon(
-      0% 0%,
-      100% 0,
-      95% 20%,
-      95% 100%,
-      95% 100%,
-      0% 100%,
-      0% 100%
-    );
-  }
+.tippy-box[data-theme="regular"] .tippy-content {
+  font-size: 14px;
+}
 
-  .chatBubbleFriend {
-    -webkit-clip-path: polygon(
-      0% 0%,
-      100% 0%,
-      100% 100%,
-      0% 100%,
-      5% 100%,
-      5% 100%,
-      5% 20%
-    );
+.chatBubbleUser {
+  -webkit-clip-path: polygon(
+    0% 0%,
+    100% 0,
+    95% 20%,
+    95% 100%,
+    95% 100%,
+    0% 100%,
+    0% 100%
+  );
+  clip-path: polygon(
+    0% 0%,
+    100% 0,
+    95% 20%,
+    95% 100%,
+    95% 100%,
+    0% 100%,
+    0% 100%
+  );
+}
 
-    clip-path: polygon(
-      0% 0%,
-      100% 0%,
-      100% 100%,
-      0% 100%,
-      5% 100%,
-      5% 100%,
-      5% 20%
-    );
-  }
-  .no-visible-scrollbar {
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    -webkit-overflow-scrolling: touch;
-  }
+.chatBubbleFriend {
+  -webkit-clip-path: polygon(
+    0% 0%,
+    100% 0%,
+    100% 100%,
+    0% 100%,
+    5% 100%,
+    5% 100%,
+    5% 20%
+  );
+  clip-path: polygon(
+    0% 0%,
+    100% 0%,
+    100% 100%,
+    0% 100%,
+    5% 100%,
+    5% 100%,
+    5% 20%
+  );
+}
 
-  .no-visible-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-  /* Style the scroll bar itself */
-  ::-webkit-scrollbar {
-    width: 10px; /* Adjust the width of the scroll bar */
-    background-color: var(
-      --text-dark-slate-gray
-    ); /* Background color of the scroll bar */
-  }
+.no-visible-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+}
 
-  /* Style the thumb (the part that you drag) */
-  ::-webkit-scrollbar-thumb {
-    background-color: var(--text-dark-slate-gray); /* Color of the thumb */
-    border-radius: 5px; /* Rounded corners of the thumb */
-    border: 1px solid var(--background-off-white); /* Creates a border around the thumb */
-  }
+.no-visible-scrollbar::-webkit-scrollbar {
+  display: none;
+}
 
-  /* Style the thumb when it's being hovered or clicked */
-  ::-webkit-scrollbar-thumb:hover {
-    background-color: var(--primary-dark-25); /* Darker color when hovering */
-  }
+/* Style the scroll bar itself */
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: var(--text-dark-slate-gray);
+}
+
+/* Style the thumb (the part that you drag) */
+::-webkit-scrollbar-thumb {
+  background-color: var(--text-dark-slate-gray);
+  border-radius: 5px;
+  border: 1px solid var(--background-off-white);
+}
+
+/* Style the thumb when it's being hovered or clicked */
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--primary-dark-25);
 }

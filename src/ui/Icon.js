@@ -2,17 +2,18 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 const Icon = ({ withText }) => {
-  const styleWithOutText = { width: "fit", height: "fit", marginTop: "0" };
-  const styleWithText = { width: "full", height: "full", marginTop: "5rem" };
+  const styleWithOutText = { width: "100%", height: "100%", marginTop: "0" };
+  const styleWithText = { width: "100%", height: "100%", marginTop: "5rem" };
+
   return (
     <div
       style={withText ? styleWithText : styleWithOutText}
-      className=" flex justify-evenly items-center w-10 h-10  md:mt-0 "
+      className="flex justify-evenly items-center w-10 h-10 md:mt-0"
     >
       <section
-        className={`items-center justify-center flex aspect-square h-fit p-0 ${
-          withText ? "w-40 h-20" : " w-20 "
-        } `}
+        className={`items-center justify-center flex aspect-square h-fit p-0 text-[--primary-text] ${
+          withText ? "w-40 h-20" : "w-20"
+        }`}
       >
         <motion.div
           initial={{ x: 1000 }}
@@ -23,34 +24,17 @@ const Icon = ({ withText }) => {
             stiffness: 20,
             damping: 10,
           }}
-          className=" w-10 h-10 flex justify-center items-center "
+          className="w-10 h-10 flex justify-center items-center"
         >
           {withText && (
-            <span className="text-[--primary-text] font-bold text-2xl  z-50 text-shadow-xl">
+            <span className="text-[--primary-text] font-bold text-2xl z-50 text-shadow-xl">
               SID
             </span>
           )}
           <Image
-            style={{
-              borderBottomLeftRadius: "50%",
-              borderTopRightRadius: "50%",
-              borderBottomRightRadius: "50%",
-              display: "flex",
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "cover",
-              objectFit: "cover",
-              height: "100%",
-              width: "100%",
-              position: "relative",
-              // filter: "drop-shadow(0rem 0rem 0.1rem #fff)",
-              transition: "all 0.3s ease-in-out",
-
-              // border: "1px solid #fff",
-            }}
-            className="bg-[--vintage-teal-50]"
             height={100}
             width={100}
+            className="bg-[--vintage-teal-50] rounded-t-full rounded-br-full"
             alt="icon image"
             src="/e.png"
           />
@@ -64,33 +48,13 @@ const Icon = ({ withText }) => {
             stiffness: 20,
             damping: 10,
           }}
-          className=" w-10 h-10  flex  justify-center items-center"
+          className="w-10 h-10 flex justify-center items-center"
         >
           <Image
-            style={{
-              display: "flex",
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "cover",
-              objectFit: "cover",
-              height: "100%",
-              width: "100%",
-              borderBottomLeftRadius: "50%",
-              borderTopRightRadius: "50%",
-              borderTopLeftRadius: "50%",
-              borderTop: "50%",
-              position: "relative",
-
-              // filter: "drop-shadow(0rem 0rem 0.1rem #fff)",
-              transition: "all 0.3s ease-in-out",
-
-              // border: "1px solid #fff",
-            }}
-            alt="icon image"
-            className="bg-[--vintage-teal-50]"
+            className="bg-[--vintage-teal-50] rounded-b-full rounded-tl-full"
             height={100}
             width={100}
-            priority
+            alt="icon image"
             src="/e.png"
           />
           {withText && (

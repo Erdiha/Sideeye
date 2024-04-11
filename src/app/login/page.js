@@ -4,19 +4,25 @@ import Icon from "@/ui/Icon";
 import { Input } from "@/ui/Input";
 import { Label } from "@/ui/Label";
 import { cn } from "@/utils/cn";
+import { Eye, EyeSlash } from "@phosphor-icons/react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { ring } from "ldrs";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import CustomTooltip from "../../ui/Tippy";
+import { showToast } from "../../ui/Toast";
 
 export default function LoginForm() {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
+  const [passwordDontMatch, setPasswordDontMatch] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isLogin, setIsLogin] = useState(true);
+  const [showPassword, setShowPassword] = useState(false);
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
+    confirmPassword: "",
   });
 
   const router = useRouter();
@@ -30,7 +36,6 @@ export default function LoginForm() {
         setError(null);
         try {
           const { data, error } = await supabase.auth.getUser();
-
           if (error) throw error;
           if (isMounted && data.user) {
             setUser(data.user);
@@ -43,69 +48,103 @@ export default function LoginForm() {
         }
       }
     }
-
     getUser();
-
     return () => {
       isMounted = false;
     };
   }, [router]);
 
-  ///////////////////////////////////signup handler
+  // handleSignUp function
   const handleSignUp = async (e) => {
     e.preventDefault();
-    const { user, error } = await supabase.auth.signUp({
-      email: credentials.email,
-      password: credentials.password,
-      options: {
-        emailRedirectTo: window.location.origin,
-      },
-    });
-
-    if (error) {
-      console.error(error);
+    if (credentials.password !== credentials.confirmPassword) {
+      setPasswordDontMatch(true);
+      showToast("Passwords don't match", {
+        type: "error",
+        position: "bottom-center",
+      });
+      return;
     } else {
-      // Insert user data into the users table
-      const { error: insertError } = await supabase
-        .from("users")
-        .insert([
-          { id: user.id, email: user.email /*, other fields if needed */ },
-        ]);
+      setPasswordDontMatch(false);
+    }
 
-      if (insertError) {
-        console.error("Error inserting user data:", insertError);
-      } else {
-        setUser(user);
-        router.refresh(); // Reload the current page
-        setCredentials({ email: "", password: "" });
-        router.push("/saloon"); // Redirect to the saloon page
+    setLoading(true);
+    try {
+      const { user, error } = await supabase.auth.signUp({
+        email: credentials.email,
+        password: credentials.password,
+        options: {
+          redirectTo: window.location.origin + "/login", // Redirect to the sign-in page
+        },
+      });
+
+      if (error) {
+        showToast(error.message, { type: "error", position: "bottom-center" });
+        throw new Error(error.message);
       }
+
+      // Send user data to your backend for storing in the database
+      const response = await fetch("/api/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: credentials.email,
+          username: credentials.email.split("@")[0],
+          password: credentials.password, // Send the original password for hashing
+        }),
+      });
+
+      if (!response.ok) {
+        const responseData = await response.json();
+        showToast(responseData.error, {
+          type: "error",
+          position: "bottom-center",
+        });
+        throw new Error("Failed to create user");
+      }
+
+      showToast("Please check your email to validate your account", {
+        type: "success",
+        position: "bottom-center",
+      });
+
+      setUser(user);
+      setCredentials({ email: "", password: "" });
+      setIsLogin(true);
+    } catch (err) {
+      console.error(err);
+      setError(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
-  ///////////////////////////////////////signin handler
+  // handleSignIn function
   const handleSignIn = async (e) => {
     e.preventDefault();
-    const { data: user, error } = await supabase.auth.signInWithPassword({
-      email: credentials.email,
-      password: credentials.password,
-    });
+    setLoading(true);
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: credentials.email,
+        password: credentials.password,
+      });
 
-    if (error) {
-      console.error(error);
+      if (error) {
+        showToast(error.message, { type: "error", position: "bottom-center" });
+        throw new Error(error.message);
+      }
+
+      const { user } = data;
+      setUser(user);
       setCredentials({ email: "", password: "" });
-      return; // Stop the function if there's an error
-    }
-
-    setUser(user);
-    setCredentials({ email: "", password: "" });
-
-    if (user) {
-      // If user is authenticated, redirect to the dashboard page
       router.push("/saloon");
-    } else {
-      // If user is not authenticated, stay on the login page
-      router.push("/login");
+    } catch (err) {
+      console.error(err);
+      setError(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -114,26 +153,6 @@ export default function LoginForm() {
     setCredentials({ ...credentials, [name]: value });
   };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log("Credentials:", credentials); // Log the credentials for debugging
-  //   const endpoint = isLogin ? "login" : "signup";
-  //   fetch(`http://localhost:8000/api/${endpoint}/`, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(credentials),
-  //   })
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       console.log(`${isLogin ? "Login" : "Signup"} response:`, data);
-  //       // Handle the response here
-  //     })
-  //     .catch((error) =>
-  //       console.error(`Error in ${isLogin ? "login" : "signup"}:`, error)
-  //     );
-  // };
   if (loading) {
     ring.register("my-precious");
     return (
@@ -183,16 +202,75 @@ export default function LoginForm() {
           </LabelInputContainer>
           <LabelInputContainer className="mb-4">
             <Label htmlFor="password">Password</Label>
-            <Input
-              className="px-2"
-              id="password"
-              name="password"
-              placeholder="Password"
-              type="password"
-              value={credentials.password}
-              onChange={handleChange}
-            />
+            <div className="relative">
+              <Input
+                className="px-2 w-full pr-10" // Adjust the paddingRight to make room for the icon
+                id="password"
+                name="password"
+                placeholder="Password"
+                type={showPassword ? "text" : "password"}
+                value={credentials.password}
+                onChange={handleChange}
+              />
+              <CustomTooltip
+                content={showPassword ? "Hide password" : "Show password"}
+                size="large" // Optionally adjust the size of the tooltip
+              >
+                {showPassword ? (
+                  <EyeSlash
+                    onClick={() => setShowPassword(!showPassword)}
+                    size={24}
+                    color="teal"
+                    className="absolute top-1/2 right-2 transform -translate-y-1/2 cursor-pointer"
+                  />
+                ) : (
+                  <Eye
+                    onClick={() => setShowPassword(!showPassword)}
+                    size={24}
+                    color="teal"
+                    className="absolute top-1/2 right-2 transform -translate-y-1/2 cursor-pointer"
+                  />
+                )}
+              </CustomTooltip>
+            </div>
           </LabelInputContainer>
+
+          {!isLogin && (
+            <LabelInputContainer className="mb-4">
+              <Label htmlFor="confirmPassword">Confirm Password</Label>
+              <div className="relative">
+                <Input
+                  className="px-2 w-full pr-10" // Adjust the paddingRight to make room for the icon
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  placeholder="Confirm Password"
+                  type={showPassword ? "text" : "password"}
+                  value={credentials.confirmPasswordpassword}
+                  onChange={handleChange}
+                />
+                <CustomTooltip
+                  content={showPassword ? "Hide password" : "Show password"}
+                  size="large" // Optionally adjust the size of the tooltip
+                >
+                  {showPassword ? (
+                    <EyeSlash
+                      onClick={() => setShowPassword(!showPassword)}
+                      size={24}
+                      color="teal"
+                      className="absolute top-1/2 right-2 transform -translate-y-1/2 cursor-pointer"
+                    />
+                  ) : (
+                    <Eye
+                      onClick={() => setShowPassword(!showPassword)}
+                      size={24}
+                      color="teal"
+                      className="absolute top-1/2 right-2 transform -translate-y-1/2 cursor-pointer"
+                    />
+                  )}
+                </CustomTooltip>
+              </div>
+            </LabelInputContainer>
+          )}
           <button
             className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
             type="submit"
