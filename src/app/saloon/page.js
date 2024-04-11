@@ -1,25 +1,20 @@
 "use client";
+import MapComponent from "@/components/mapComponent/Map";
 import { handleFocusCurrentLocation } from "@/components/mapComponent/mapHelpers";
 import BurgerMenu from "@/components/navComponent/BurgerMenu";
 import Navbar from "@/components/navComponent/Navbar";
 import { dummyProfiles } from "@/data/dummyData";
-import dynamic from "next/dynamic";
 import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
-import { Query } from "../../../server/db"; 
-/////// SECTION - MAIN
 
-const MapComponent = dynamic(() => import("@/components/mapComponent/Map"), {
-  ssr: false,
-});
+/////// SECTION - MAIN
 
 const Saloon = () => {
   const mapRef = useRef(null);
   const [currentPosition, setCurrentPosition] = useState();
   const [menuOpen, setMenuOpen] = useState(false);
   const [markers, setMarkers] = useState(dummyProfiles);
-
-
+  const [messageData, setmessageData] = useState([]);
 
   useEffect(() => {
     if (!currentPosition) {

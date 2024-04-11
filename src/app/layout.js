@@ -8,11 +8,6 @@ import "./globals.css";
 const inter = Space_Grotesk({ subsets: ["latin"] });
 
 export default async function RootLayout({ children }) {
-  // const {
-  //   data: { user },
-  // } = await supabase.auth.getUser();
-  // console.log("usersssss",user);
-
   return (
     <AuthProvider>
       <html lang="en">

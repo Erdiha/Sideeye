@@ -1,4 +1,4 @@
-const ddata={
+const data={
   "id": "user_123",
   "username": "exampleUser",
   "email": "user@example.com",
